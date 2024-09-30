@@ -4,13 +4,8 @@ import { message } from "antd";
 import { getEvents } from "../../../../api-services/events-service";
 import { EventType } from "../../../../interfaces";
 import EventCard from "./common/event-card";
-import Filters from "./common/filters";
 import Spinner from "../../../../components/spinner";
 function HomePage() {
-  const [filters, setFilters] = useState({
-    searchText: "",
-    date: "",
-  });
   const [events, setEvents] = useState<EventType[]>([]);
   const [loading, setLoading] = useState(false);
   const { currentUser } = userGlobalStore() as UsersStoreType;

@@ -2,10 +2,7 @@ import { useEffect, useState } from "react";
 import PageTitle from "../../../../../components/page-title";
 import { BookingType } from "../../../../../interfaces";
 import { message, Table } from "antd";
-import {
-  getAllBookings,
-  getUserBookings,
-} from "../../../../../api-services/booking-service";
+import { getAllBookings } from "../../../../../api-services/booking-service";
 import { getDateTimeFormat } from "../../../../../helpers/date-time-farmat";
 
 function AminBookings() {
