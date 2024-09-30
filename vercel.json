@@ -5,7 +5,7 @@
       "destination": "https://golbahar-server.onrender.com/api/:match*"
     },
     {
-      "cource": "/(.*)",
+      "scource": "/(.*)",
       "destination": "/"
     }
   ]
