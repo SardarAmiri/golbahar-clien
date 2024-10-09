@@ -8,9 +8,10 @@ import {
 } from "../../../../../api-services/events-service";
 import { getDateTimeFormat } from "../../../../../helpers/date-time-farmat";
 import { Pen, Trash } from "lucide-react";
+import { EventType } from "../../../../../interfaces";
 function EventsPage() {
-  const [events, setEvents] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [events, setEvents] = useState<EventType[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
   const navigate = useNavigate();
   const getData = async () => {
     try {
@@ -49,8 +50,8 @@ function EventsPage() {
     {
       title: "Date & Time",
       dataIndex: "date",
-      render: (date: any, row: any) => {
-        return getDateTimeFormat(`${date} ${row.time}`);
+      render: (date: string, record: EventType) => {
+        return getDateTimeFormat(`${date} ${record.time}`);
       },
       key: "date",
     },
@@ -62,13 +63,13 @@ function EventsPage() {
     {
       title: "Created At",
       dataIndex: "createdAt",
-      render: (date: any) => getDateTimeFormat(date),
+      render: (createdAt: string) => getDateTimeFormat(createdAt),
       key: "createdAt",
     },
     {
       title: "Actions",
       dataIndex: "actions",
-      render: (_text: any, record: any) => (
+      render: (_text: any, record: EventType) => (
         <div className="flex gap-5">
           <Trash
             className="cursor-pointer text-red-700"

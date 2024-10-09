@@ -13,6 +13,7 @@ function AminBookings() {
     try {
       setLoading(true);
       const response = await getAllBookings();
+      console.log(response);
       setBookings(response.data);
     } catch (error: any) {
       message.error(error.message);
@@ -30,19 +31,20 @@ function AminBookings() {
       title: "Event",
       dataIndex: "event",
       key: "event",
-      render: (event: any) => event.name,
+      render: (event: { name: string }) => event.name,
     },
     {
       title: "User",
       dataIndex: "user",
       key: "user",
-      render: (event: any) => event.name,
+      render: (user: { name: string }) => user.name,
     },
     {
       title: "Date & Time",
       dataIndex: "event",
       key: "event",
-      render: (event: any) => getDateTimeFormat(`${event.date} ${event.time}`),
+      render: (event: { date: string; time: string }) =>
+        getDateTimeFormat(`${event.date} ${event.time}`),
     },
     {
       title: "Ticket Type",

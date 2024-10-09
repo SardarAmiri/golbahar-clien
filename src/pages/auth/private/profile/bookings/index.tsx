@@ -7,6 +7,7 @@ import {
   getUserBookings,
 } from "../../../../../api-services/booking-service";
 import { getDateTimeFormat } from "../../../../../helpers/date-time-farmat";
+import { EventType } from "../../../../../interfaces";
 
 function UserBookingsPage() {
   const [bookings, setBookings] = useState<BookingType[]>([]);
@@ -16,9 +17,10 @@ function UserBookingsPage() {
     try {
       setLoading(true);
       const response = await getUserBookings();
+      console.log(response.data);
       setBookings(response.data);
     } catch (error: any) {
-      message.error(error.message);
+      message.error(error?.message || "Failed to fetch bookings");
     } finally {
       setLoading(false);
     }
@@ -30,6 +32,11 @@ function UserBookingsPage() {
 
   const onCancelBooking = async (booking: BookingType) => {
     try {
+      if (!booking._id || (booking.totalAmount > 0 && !booking.paymentId)) {
+        message.error("Missing booking or payment information");
+        return;
+      }
+
       setLoading(true);
       const payload = {
         eventId: booking.event._id,
@@ -39,6 +46,9 @@ function UserBookingsPage() {
         paymentId: booking.paymentId,
         totalAmount: booking.totalAmount,
       };
+      if (booking.totalAmount > 0) {
+        payload.paymentId = booking.paymentId;
+      }
       await cancelBooking(payload);
       message.success("Booking cancelled successfully");
       getData();
@@ -54,13 +64,14 @@ function UserBookingsPage() {
       title: "Event Name",
       dataIndex: "event",
       key: "event",
-      render: (event: any) => event.name,
+      render: (event: EventType) => event.name,
     },
     {
       title: "Date & Time",
       dataIndex: "event",
       key: "event",
-      render: (event: any) => getDateTimeFormat(`${event.date} ${event.time}`),
+      render: (event: EventType) =>
+        getDateTimeFormat(`${event.date} ${event.time}`),
     },
     {
       title: "Ticket Type",

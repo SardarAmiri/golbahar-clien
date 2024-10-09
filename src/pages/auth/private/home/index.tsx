@@ -14,9 +14,14 @@ function HomePage() {
     try {
       setLoading(true);
       const response = await getEvents();
-      setEvents(response.data);
-    } catch (error) {
-      message.error("Failed to fetch data");
+      console.log(response.data);
+      if (Array.isArray(response.data)) {
+        setEvents(response.data); // Set the array of events directly
+      } else {
+        message.error("Invalid response format");
+      }
+    } catch (error: any) {
+      message.error(error?.message || "Failed to fetch data");
     } finally {
       setLoading(false);
     }
@@ -39,7 +44,7 @@ function HomePage() {
       <p>Welcome, {currentUser?.name} !</p>
       {/* <Filters filters={filters} setFilters={setFilters} onFilters={getData} /> */}
       <div className="flex flex-col gap-7 mt-7">
-        {events.map((event: any) => (
+        {events.map((event: EventType) => (
           <EventCard key={event._id} event={event} />
         ))}
       </div>

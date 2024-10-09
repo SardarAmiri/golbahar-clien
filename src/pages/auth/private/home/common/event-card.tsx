@@ -6,7 +6,9 @@ import { useNavigate } from "react-router-dom";
 
 function EventCard({ event }: { event: EventType }) {
   const navigate = useNavigate();
-  const mainImage = event.media[0];
+  // const mainImage = event.media[0];
+  const mainImage =
+    typeof event.media[0] === "string" ? event.media[0] : event.media[0]?.url;
   return (
     <div className="grid lg:grid-cols-3 grid-cols-1 border border-solid border-gray-200 items-center gap-5">
       <div className="col-span-1">

@@ -1,6 +1,6 @@
 import { EventType } from "../../../../interfaces";
 import { useParams } from "react-router-dom";
-import { Image, message } from "antd";
+import { message } from "antd";
 import { getEventById } from "../../../../api-services/events-service";
 import { useEffect, useState } from "react";
 import Spinner from "../../../../components/spinner";
@@ -11,12 +11,12 @@ import TicketsSelection from "./common/tickets-selection";
 function EventInforPage() {
   const [eventData, setEventData] = useState<EventType | null>(null);
   const [loading, setLoading] = useState(false);
-  const params: any = useParams();
+  const params = useParams<Record<string, string | undefined>>();
 
   const getData = async () => {
     try {
       setLoading(true);
-      const response = await getEventById(params.id);
+      const response = await getEventById(params.id!);
       setEventData(response.data);
     } catch (error) {
       message.error("Failed to fetch event");
@@ -36,7 +36,7 @@ function EventInforPage() {
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [params.id]);
   if (loading) {
     return (
       <div className="flex h-screen justify-center items-center">
@@ -64,15 +64,24 @@ function EventInforPage() {
             </div>
           </div>
         </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-3 mt-7">
-          {eventData?.media.map((media, index) => (
-            <Image
-              src={media}
-              height={220}
-              className="object-cover rounded"
-              key={index}
-            />
-          ))}
+          {eventData.media?.map(
+            (mediaItem: string | { url: string }, index: number) => {
+              const mediaUrl =
+                typeof mediaItem === "string" ? mediaItem : mediaItem.url;
+
+              return (
+                <img
+                  src={mediaUrl}
+                  height={220}
+                  className="object-cover rounded"
+                  key={index}
+                  alt={`Event media ${index}`}
+                />
+              );
+            }
+          )}
         </div>
         <div className="mt-7">
           <p className="text-gray-600 text-sm">{eventData?.description}</p>

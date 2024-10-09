@@ -4,11 +4,11 @@ import { Form, Input, Button, message } from "antd";
 import { useState } from "react";
 import { loginUser } from "../../../api-services/users-service";
 import Cookies from "js-cookie";
-
+import { LoginFormValues } from "../../../interfaces/index";
 function LoginPage() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const onFinish = async (values: never) => {
+  const onFinish = async (values: LoginFormValues) => {
     try {
       setLoading(true);
       const response = await loginUser(values);
@@ -16,7 +16,7 @@ function LoginPage() {
       Cookies.set("token", response.token);
       navigate("/");
     } catch (error: any) {
-      message.error(error.response?.data.message || error.message);
+      message.error(error.response?.data?.message || error.message);
     } finally {
       setLoading(false);
     }

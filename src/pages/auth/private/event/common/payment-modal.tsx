@@ -10,6 +10,8 @@ import { useState } from "react";
 import { formatDateForGoogleCalendar } from "../../../../../helpers/date-time-farmat";
 import { createBooking } from "../../../../../api-services/booking-service";
 import { useNavigate } from "react-router-dom";
+import { PaymentModalProps } from "../../../../../interfaces/index";
+
 function PaymentModal({
   showPaymentModal,
   setShowPaymentModal,
@@ -17,20 +19,13 @@ function PaymentModal({
   selectedTicketCount,
   totalAmount,
   event,
-}: {
-  showPaymentModal: any;
-  setShowPaymentModal: any;
-  selectedTicketType: string;
-  selectedTicketCount: number;
-  totalAmount: number;
-  event: EventType;
-}) {
+}: PaymentModalProps) {
   const [loading, setLoading] = useState<boolean>(false);
   const stripe = useStripe();
   const elements = useElements();
   const navigate = useNavigate();
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     try {
       setLoading(true);
       e.preventDefault();
@@ -52,7 +47,7 @@ function PaymentModal({
       } else {
         message.success("Payment Successful");
         const bookingPayload = {
-          event: event._id,
+          event: event,
           ticketType: selectedTicketType,
           ticketsCount: selectedTicketCount,
           totalAmount,
@@ -70,7 +65,8 @@ function PaymentModal({
         }, 2000);
       }
     } catch (error: any) {
-      message.error(error.message);
+      const errorMessage = error.message || "An error occurred.";
+      message.error(errorMessage);
     } finally {
       setLoading(false);
     }

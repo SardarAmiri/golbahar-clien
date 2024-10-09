@@ -16,7 +16,9 @@ function TicketsSelection({ eventData }: { eventData: EventType }) {
   const [maxCount, setMaxCount] = useState<number>(1);
   const [selectedTicketCount, setSelectedTicketCount] = useState<number>(1);
   const [showPaymentModal, setShowPaymentModal] = useState<boolean>(false);
-  const [stripeOption, setStripeOption] = useState<any>({});
+  const [stripeOption, setStripeOption] = useState<
+    Partial<{ clientSecret: string }>
+  >({});
   const [loading, setLoading] = useState<boolean>(false);
   const navigate = useNavigate();
 
@@ -44,7 +46,7 @@ function TicketsSelection({ eventData }: { eventData: EventType }) {
   const handleJoinFree = async () => {
     try {
       const bookingPayload = {
-        event: eventData._id,
+        event: eventData,
         ticketType: "Free",
         ticketsCount: 0,
         totalAmount: 0,
@@ -123,7 +125,7 @@ function TicketsSelection({ eventData }: { eventData: EventType }) {
                 type="number"
                 value={selectedTicketCount}
                 className="w-96"
-                onChange={(e: any) => {
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                   setSelectedTicketCount(parseInt(e.target.value));
                 }}
                 min={1}

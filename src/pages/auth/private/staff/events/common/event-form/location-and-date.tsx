@@ -13,7 +13,7 @@ function LocationAndDate({
         <Input
           placeholder="Address"
           value={eventData.address}
-          onChange={(e: any) =>
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setEventData({ ...eventData, address: e.target.value })
           }
         />
@@ -22,7 +22,7 @@ function LocationAndDate({
         <Input
           placeholder="City"
           value={eventData.city}
-          onChange={(e: any) =>
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setEventData({ ...eventData, city: e.target.value })
           }
         />
@@ -31,7 +31,7 @@ function LocationAndDate({
         <Input
           placeholder="Postal Code"
           value={eventData.postcode}
-          onChange={(e: any) =>
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setEventData({ ...eventData, postcode: e.target.value })
           }
         />
@@ -41,7 +41,7 @@ function LocationAndDate({
           placeholder="Date"
           value={eventData.date}
           type="date"
-          onChange={(e: any) =>
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setEventData({ ...eventData, date: e.target.value })
           }
           min={new Date().toISOString().split("T")[0]}
@@ -52,7 +52,7 @@ function LocationAndDate({
           placeholder="Time"
           value={eventData.time}
           type="time"
-          onChange={(e: any) =>
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setEventData({ ...eventData, time: e.target.value })
           }
         />

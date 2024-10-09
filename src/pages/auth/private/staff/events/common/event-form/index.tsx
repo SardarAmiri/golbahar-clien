@@ -10,17 +10,28 @@ import {
   createEvent,
   updateEvent,
 } from "../../../../../../../api-services/events-service";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Params } from "react-router-dom";
+import { EventType } from "../../../../../../../interfaces";
 
+// export interface EventFormStepProps {
+//   eventData: any;
+//   setEventData: any;
+//   setCurrentStep: any;
+//   currentStep: number;
+//   selectedMediaFiles?: any;
+//   setSelectedMediaFiles?: any;
+//   loading?: boolean;
+//   onFinish?: any;
+// }
 export interface EventFormStepProps {
-  eventData: any;
-  setEventData: any;
-  setCurrentStep: any;
+  eventData: EventType;
+  setEventData: React.Dispatch<React.SetStateAction<EventType>>;
+  setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
   currentStep: number;
-  selectedMediaFiles?: any;
-  setSelectedMediaFiles?: any;
-  loading?: boolean;
-  onFinish?: any;
+  selectedMediaFiles: File[];
+  setSelectedMediaFiles: React.Dispatch<React.SetStateAction<File[]>>;
+  loading: boolean;
+  onFinish: () => Promise<void>;
 }
 
 function EventForm({
@@ -31,23 +42,23 @@ function EventForm({
   type?: "create" | "edit";
 }) {
   const [currentStep, setCurrentStep] = useState(0);
-  const [eventData, setEventData] = useState<any>(initialData);
-  const [selectedMediaFiles, setSelectedMediaFiles] = useState([]);
+  const [eventData, setEventData] = useState<EventType>(initialData);
+  const [selectedMediaFiles, setSelectedMediaFiles] = useState<File[]>([]);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const params: any = useParams();
+  const params = useParams<Params<"id">>();
 
   const onFinish = async () => {
     try {
       setLoading(true);
       const [...urls] = await Promise.all(
-        selectedMediaFiles.map(async (file: any) => {
+        selectedMediaFiles.map(async (file: File) => {
           return await uploadFileAndReturnUrl(file);
         })
       );
       eventData.media = [...(eventData?.media || []), ...urls];
       if (type === "edit") {
-        await updateEvent(params.id, eventData);
+        await updateEvent(params.id!, eventData);
         message.success("Event Updated Successfully");
       } else {
         await createEvent(eventData);

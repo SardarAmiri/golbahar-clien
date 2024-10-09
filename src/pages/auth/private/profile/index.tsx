@@ -5,7 +5,10 @@ import userGlobalStore, { UsersStoreType } from "../../../../store/user-store";
 function ProfilePage() {
   const { currentUser }: UsersStoreType = userGlobalStore() as UsersStoreType;
   if (!currentUser) return null;
-  const renderUserProperty = (label: string, value: any) => {
+  const renderUserProperty = (
+    label: string,
+    value: string | number | undefined
+  ) => {
     return (
       <div className="flex flex-col text-sm">
         <span className="text-gray-500">{label}</span>
@@ -22,7 +25,9 @@ function ProfilePage() {
         {renderUserProperty("Email", currentUser?.email)}
         {renderUserProperty(
           "Joined At",
-          getDateTimeFormat(currentUser?.createdAt!)
+          currentUser?.createdAt
+            ? getDateTimeFormat(currentUser.createdAt)
+            : "N/A"
         )}
         {renderUserProperty("Role", currentUser?.isStaff ? "Staff" : "User")}
       </div>

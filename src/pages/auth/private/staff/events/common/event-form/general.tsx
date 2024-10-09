@@ -15,7 +15,7 @@ function General({
         <Input
           placeholder="Event Name"
           value={eventData.name}
-          onChange={(e: any) =>
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setEventData({ ...eventData, name: e.target.value })
           }
         />
@@ -24,7 +24,7 @@ function General({
         <Input.TextArea
           placeholder="Description"
           value={eventData.description}
-          onChange={(e: any) =>
+          onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
             setEventData({ ...eventData, description: e.target.value })
           }
         />
@@ -33,7 +33,7 @@ function General({
         <Input.TextArea
           placeholder="Organizer"
           value={eventData.organizer}
-          onChange={(e: any) =>
+          onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
             setEventData({ ...eventData, organizer: e.target.value })
           }
         />
