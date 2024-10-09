@@ -34,17 +34,20 @@ Make sure you have the following installed:
 2. Install dependencies:
    npm install
 
-3. Environment Variables
-   Create a .env file in the root directory of the frontend project with the following environment variables:
+### 3. Environment Variables
 
-  VITE_FIREBASE_API_KEY=your-firebase-api-key
-  VITE_FIREBASE_AUTH_DOMAIN=your-firebase-auth-domain
-  VITE_FIREBASE_PROJECT_ID=your-firebase-project-id
-  VITE_FIREBASE_STORAGE_BUCKET=your-firebase-storage-bucket
-  VITE_FIREBASE_MESSAGING_SENDERID=your-firabase-messaging-sender-id
-  VITE_FIREBASE_APP_ID=1:your-firebase-app-id
-  VITE_FIREBASE_MEASUREMENT_ID=your-firebase-measurement-id
-  VITE_STRIPE_PUBLISHABLE_KEY=your-stripe-publishable-key
+Create a `.env` file in the root directory of the frontend project with the following environment variables:
+
+```env
+VITE_FIREBASE_API_KEY=your-firebase-api-key
+VITE_FIREBASE_AUTH_DOMAIN=your-firebase-auth-domain
+VITE_FIREBASE_PROJECT_ID=your-firebase-project-id
+VITE_FIREBASE_STORAGE_BUCKET=your-firebase-storage-bucket
+VITE_FIREBASE_MESSAGING_SENDERID=your-firebase-messaging-sender-id
+VITE_FIREBASE_APP_ID=1:your-firebase-app-id
+VITE_FIREBASE_MEASUREMENT_ID=your-firebase-measurement-id
+VITE_STRIPE_PUBLISHABLE_KEY=your-stripe-publishable-key
+
 
   replace all your firebase value and stripe publishable key
 
