@@ -6,7 +6,7 @@
 
 # Golbahar Frontend
 
-This is the frontend of the Golbahar project, built with React.js, TypeScript, Ant Design (Antd), and Tailwind CSS for styling. It interacts with the backend API and provides the UI for users to browse products, log in, make purchases, etc.
+This is the front end of the Golbahar project, built with React.js, TypeScript, Ant Design (Antd), and Tailwind CSS for styling. It interacts with the backend API and provides the UI for users to browse products, login, make purchases, etc.
 
 ## Table of Contents
 
@@ -15,7 +15,7 @@ This is the frontend of the Golbahar project, built with React.js, TypeScript, A
 - [Environment Variables](#environment-variables)
 - [Running the Frontend Locally](#running-the-frontend-locally)
 - [Contributing](#contributing)
-- Hosted Version
+- [Hosted Version](#Hosted-Version)
 
 ## Requirements
 
@@ -59,8 +59,8 @@ VITE_STRIPE_PUBLISHABLE_KEY=your-stripe-publishable-key
    npm run dev
 2. Interacting with the Backend:
 
-  The frontend will make API calls to the backend running at http://localhost:5000 (or another URL if specified in .env).
-  Make sure the backend is running before accessing the frontend.
+  The front end will make API calls to the backend running at http://localhost:5000 (or another URL if specified in .env).
+  Make sure the backend is running before accessing the front end.
 
 3. Authentication and Payments:
 
