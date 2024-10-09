@@ -48,7 +48,7 @@ VITE_FIREBASE_APP_ID=1:your-firebase-app-id
 VITE_FIREBASE_MEASUREMENT_ID=your-firebase-measurement-id
 VITE_STRIPE_PUBLISHABLE_KEY=your-stripe-publishable-key
 
-
+```
   replace all your firebase value and stripe publishable key
 
 
