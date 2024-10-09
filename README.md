@@ -15,6 +15,7 @@ This is the frontend of the Golbahar project, built with React.js, TypeScript, A
 - [Environment Variables](#environment-variables)
 - [Running the Frontend Locally](#running-the-frontend-locally)
 - [Contributing](#contributing)
+- Hosted Version
 
 ## Requirements
 
@@ -76,6 +77,11 @@ We use Tailwind CSS and Ant Design for styling. The combination provides a flexi
 
 We welcome contributions! Please make sure to follow the code style and structure outlined in the project. Feel free to submit pull requests, open issues, or suggest new features.
 
+## Hosted Version
+
+The live version of the project is available at: Hosted Golbahar Frontend
+
+[https://golbahar-clien.vercel.app]
 
 ---
 
